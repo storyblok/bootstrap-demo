@@ -1,14 +1,19 @@
 <p align="center">
-  <h1 align="center">Quickstart for Storyblok</h1>
+  <h1 align="center">Storyblok Demo Website</h1>
 </p>
 <br><br>
 
+## Intro
+
+This is a demo website using Storyblok as CMS. With Storyblok you can decide to host your website on your own servers or to use Storyblok´s rendering service which is based on following project [github.com/storyblok/sinatra-boilerplate](https://github.com/storyblok/sinatra-boilerplate).
+
+If you want to use the Storyblok´s fully hosted solution you can use this project as a starting point.
 
 ## Getting started
 
 After cloning this repo:
 
-1. Create a space in Storyblok and choose advanced settings to choose the option "Hosted/Rendering service" and then "Quickstart"
+1. Create a space in Storyblok and choose "Play with a demo"
 2. Rename _token.js to token.js and insert your "theme" token (which you can find in the Storyblok dashboard).
 3. Fire up your dev environment
 ```
@@ -20,7 +25,7 @@ $ cd ./project && npm i && npm run dev
 
 ## Commands
 
-In the background we're using `gulp` so you can change all the commands below and adopt them to your need.
+In the background we're using `gulp` so you can change all the commands below and adopt them to your needs.
 ```
 # Start you local dev environment on port 4440
 $ npm run dev
@@ -29,6 +34,7 @@ $ npm run dev
 $ npm run build
 
 # Sync your current state on the dev environment
+# NOTICE: By default the environment is always live. To change this set 'environment' to 'dev' in `config.js`.
 $ npm run deploy:dev
 
 # Sync your current state on the live environment

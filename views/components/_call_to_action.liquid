@@ -49,9 +49,9 @@
         {% endif %}
 
         {% if blok.text != blank %}
-          <p class="text-h3">
-            {{ blok.text }}
-          </p>
+          <div class="text-h3">
+            {{ blok.text | markdown }}
+          </div>
         {% endif %}
 
         {% if blok.social_icons != blank %}
