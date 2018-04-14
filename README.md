@@ -15,13 +15,14 @@ After cloning this repo:
 
 1. Create a space in Storyblok and choose "Play with a demo"
 2. Rename _token.js to token.js and insert your "theme" token (which you can find in the Storyblok dashboard).
+![Theme token](https://monosnap.com/image/czAadgHCUblSMTzUHxq1rRV2FZ1tYB.png)
 3. Fire up your dev environment
 ```
 $ cd ./project && npm i && npm run dev
 ```
 4. Add your dev environment 'http://localhost:4440/' to the environment settings
 
-<img style="margin: 20px 0;" src="https://a.storyblok.com/f/42225/2292x1278/a193038be7/quickstart.jpg" />
+<img style="margin: 20px 0;" src="https://monosnap.com/image/wzRktNGxNXUJ1KEuS5f7WQsf2oqUnS.png" />
 
 ## Commands
 
