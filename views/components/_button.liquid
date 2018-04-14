@@ -1,0 +1,8 @@
+{{ blok._editable }}
+{% if blok.is_inline == false %}
+<p class="{{blok.paragraph_style|join:' '}}">
+{% endif %}
+  <a class="btn {{ blok.style | join:' ' }}" href="{{ blok.link | url }}">{{ blok.text }}</a>
+{% if blok.is_inline == false %}
+</p>
+{% endif %}

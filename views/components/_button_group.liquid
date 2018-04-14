@@ -1,0 +1,6 @@
+{{ blok._editable }}
+<p class="mt-5">
+  {% for item in blok.body %}
+    {% include item.component with blok: item %}
+  {% endfor %}
+</p>

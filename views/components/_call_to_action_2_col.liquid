@@ -1,0 +1,34 @@
+{{ blok._editable }}
+<section class="fdb-block">
+  <div class="container">
+    <div class="row align-items-center">
+      {% if blok.style == 'right' %}
+        <div class="col-12 col-sm-3 text-center">
+          {% if blok.button_text != blank %}
+            <a class="btn" href="{{ blok.button_link | url }}">{{ blok.button_text }}</a>
+          {% endif %}
+        </div>
+        <div class="col-12 col-sm-9 text-center text-sm-right mt-4 mt-sm-0">
+          <h2>{{ blok.headline }}</h2>
+        </div>
+      {% else %}
+        <div class="col-12 col-sm-9 text-left">
+          <h2>{{ blok.headline }}</h2>
+        </div>
+        <div class="col-12 col-sm-3 text-left text-sm-center mt-4 mt-sm-0">
+          {% if blok.button_text != blank %}
+            <a class="btn" href="{{ blok.button_link | url }}">{{ blok.button_text }}</a>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+
+    {% if blok.image != blank %}
+      <div class="row pt-5">
+        <div class="col-12">
+          <img alt="image" class="img-fluid" src="{{ blok.image }}">
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>

@@ -1,0 +1,15 @@
+{{ blok._editable }}
+<div>
+<div class="row pt-5 pb-3">
+  <div class="col-12 text-center">
+    <p><strong>{{ blok.logo_headline }}</strong></p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 text-center">
+    {% for item in blok.logos %}
+      {% include item.component with blok: item %}
+    {% endfor %}
+  </div>
+</div>
+</div>

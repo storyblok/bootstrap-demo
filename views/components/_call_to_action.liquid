@@ -1,0 +1,83 @@
+{{ blok._editable }}
+<section class="fdb-block {{ blok.section_style | join:' ' }}"
+         {% if blok.background != blank %} style="background-image: url('{{ blok.background }}')"{% endif %}>
+  <div class="container {{ blok.container_style | join:' ' }}">
+    <div class="row {{ blok.row_style | join:' ' }}">
+      {% if blok.image != blank and blok.image_position == 'left' %}
+        <div class="col-12 col-sm-6">
+          <img alt="image" class="img-fluid" src="{{ blok.image }}">
+        </div>
+      {% endif %}
+
+      <div class="{{ blok.column_style | join:' ' }}
+                  {% if blok.width.xsmall != blank %}col-{{ blok.width.xsmall }}{% endif %}
+                  {% if blok.width.small != blank %}col-sm-{{ blok.width.small }}{% endif %}
+                  {% if blok.width.medium != blank %}col-md-{{ blok.width.medium }}{% endif %}
+                  {% if blok.width.large != blank %}col-lg-{{ blok.width.large }}{% endif %}
+                  {% if blok.width.xlarge != blank %}col-xl-{{ blok.width.xlarge }}{% endif %}">
+
+        {% if blok.icon != blank %}
+          <img alt="{{ blok.icon_alt_text }}" class="fdb-icon" src="{{ blok.icon }}">
+        {% endif %}
+
+        {% if blok.logo != blank %}
+          <p class="mb-5 mt-5">
+            <img alt="{{ blok.logo_alt_text }}" height="40" src="{{ blok.logo }}">
+          </p>
+        {% endif %}
+
+        {% if blok.in_box == true %}
+          <div class="fdb-box {{ blok.box_style | join:' ' }}">
+        {% endif %}
+
+        {% if blok.headline != blank %}
+          <h1>{{ blok.headline }}</h1>
+        {% endif %}
+
+        {% if blok.headline_2 != blank %}
+          <h2>
+            {{ blok.headline_2 }}
+          </h2>
+        {% endif %}
+
+        {% if blok.subheadline != blank %}
+          <h3>
+            <strong>
+              {{ blok.subheadline }}
+            </strong>
+          </h3>
+        {% endif %}
+
+        {% if blok.text != blank %}
+          <p class="text-h3">
+            {{ blok.text }}
+          </p>
+        {% endif %}
+
+        {% if blok.social_icons != blank %}
+          <p class="text-h2">
+            {% for item in blok.social_icons %}{% include item.component with blok: item %}{% endfor %}
+          </p>
+        {% endif %}
+
+        {% for item in blok.buttons %}
+          {% include item.component with blok: item %}
+        {% endfor %}
+
+        {% if blok.in_box == true %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if blok.image != blank and blok.image_position != 'left' %}
+        <div class="col-12 col-sm-4 col-md-6 col-lg-4 m-auto pt-5">
+          <img alt="image" class="img-fluid br-0" src="{{ blok.image }}">
+        </div>
+      {% endif %}
+    </div>
+
+    {% for item in blok.bottom_body %}
+      {% include item.component with blok: item %}
+    {% endfor %}
+  </div>
+</section>

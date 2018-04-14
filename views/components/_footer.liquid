@@ -1,0 +1,8 @@
+{{ blok._editable }}
+<footer class="fdb-block {{ blok.style | join:' ' }}">
+  <div class="container">
+    {% for item in blok.body %}
+      {% include item.component with blok: item %}
+    {% endfor %}
+  </div>
+</footer>

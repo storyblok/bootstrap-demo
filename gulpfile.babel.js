@@ -7,33 +7,15 @@ const browserSync = require('browser-sync')
 const reload = browserSync.reload
 const config = require('./config.js')
 const rename = require('gulp-rename')
-const exec = require('child_process').exec
 const portfinder = require('portfinder')
+const request = require('request')
 
-if (config.blok.domain == 'INSERT_YOUR_DOMAIN') {
-  config.blok.domain = 'fc147f74.me.storyblok.com'
-}
-
-if (config.blok.themeId == 'INSERT_SPACE_ID') {
-  config.blok.themeId = '40479'
-}
-
-gulp.task('templates:cleanup', function (cb) {
-  config.blok.environment = 'live'
-
-  exec('storyblok delete-templates --space=' + config.blok.themeId + ' --env=' + config.blok.environment, function (err, stdout, stderr) {
-    console.log(stdout)
-    console.log(stderr)
-    cb(err)
-  })
-})
-
-gulp.task('deploy:dev', function () {
+gulp.task('deploy:dev', ['storyblok:setup'], function () {
   return gulp.src('./views/**/*')
     .pipe(blok(config.blok))
 })
 
-gulp.task('deploy:live', function () {
+gulp.task('deploy:live', ['storyblok:setup'], function () {
   config.blok.environment = 'live'
 
   return gulp.src('./views/**/*')
@@ -71,7 +53,21 @@ gulp.task('vendor:scripts', function () {
     .pipe(gulp.dest('views/assets/js/vendor'))
 })
 
-gulp.task('browsersync', function () {
+gulp.task('storyblok:setup', function(cb) {
+  request.get({
+    url: 'https://mapi.storyblok.com/v1/get_space_info?token=' + config.blok.apiKey
+  }, function(error, response, body) {
+    if (error || !body) {
+      throw error
+    }
+    let spaceInfo = JSON.parse(body)
+    config.blok.themeId = spaceInfo.space_id
+    config.blok.domain = spaceInfo.hostname
+    cb()
+  })
+})
+
+gulp.task('browsersync', ['storyblok:setup'], function () {
   portfinder.getPort({port: 4440}, function (err, port) {
 
     console.log('Your project will be running on: localhost:' + port)

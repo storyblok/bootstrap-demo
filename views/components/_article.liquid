@@ -1,0 +1,25 @@
+{{ blok._editable }}
+<section class="fdb-block">
+  <div class="container">
+    <div class="row">
+      <div class="col-8 text-left">
+        <h2>{{ blok.title }}</h2>
+
+        <p>{{ blok.intro | markdown }}</p>
+
+        {% for item in blok.body %}
+          {% include item.component with blok: item %}
+        {% endfor %}
+      </div>
+      <div class="col-4">
+        <h3>Author</h3>
+        {% set author from story id:blok.author.id, find_by:'uuid' %}
+
+        <img height="30" src="{{ author.content.image }}" />
+        <p>
+          {{ author.content.name }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,26 @@
+{{ blok._editable }}
+<section class="fdb-block pb-0">
+  <div class="container">
+    <div class="row align-items-center text-left">
+      <div class="col-12 col-md-8">
+        <h1>{{ blok.headline }}</h1>
+        <p class="text-h3">
+          {{ blok.text }}
+        </p>
+      </div>
+      <div class="col-12 col-md-3 ml-auto text-left text-md-right">
+        {% for item in blok.buttons %}
+          {% include item.component with blok: item %}
+        {% endfor %}
+      </div>
+    </div>
+
+    {% if blok.image != blank %}
+      <div class="row pt-5">
+        <div class="col-12">
+          <img alt="image" class="img-fluid" src="{{ blok.image }}">
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>

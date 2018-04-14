@@ -1,0 +1,11 @@
+{{ blok._editable }}
+<div class="{% if blok.width.xsmall != blank %}col-{{ blok.width.xsmall }}{% endif %}
+            {% if blok.width.small != blank %}col-sm-{{ blok.width.small }}{% endif %}
+            {% if blok.width.medium != blank %}col-md-{{ blok.width.medium }}{% endif %}
+            {% if blok.width.large != blank %}col-lg-{{ blok.width.large }}{% endif %}
+            {% if blok.width.xlarge != blank %}col-xl-{{ blok.width.xlarge }}{% endif %}
+            {{ blok.style | join:' ' }}">
+  {% for item in blok.body %}
+    {% include item.component with blok: item %}
+  {% endfor %}
+</div>

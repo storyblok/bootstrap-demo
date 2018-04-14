@@ -1,0 +1,93 @@
+{{ blok._editable }}
+<header class="{{ blok.style | join:' ' }}">
+  <div class="container">
+    <nav class="navbar navbar-expand-md no-gutters">
+      {% if blok.logo_in_middle %}
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-{{ blok._uid }}" aria-controls="navbar-{{ blok._uid }}" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="col-4 col-md-2 text-right text-md-center order-lg-6">
+          {% if blok.logo != blank %}
+            <a href="{{ blok.logo_link | url }}">
+              <img src="{{ blok.logo }}" height="{{ blok.logo_height }}" alt="Logo">
+            </a>
+          {% endif %}
+        </div>
+
+        <div class="collapse navbar-collapse col-12 col-md-5 order-lg-1" id="navbar-{{ blok._uid }}">
+          {% if blok.nav_links != blank %}
+            <ul class="navbar-nav {{ blok.main_nav_style | join:' ' }}">
+              {% for item in blok.nav_links %}
+                {% include item.component with blok: item %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+
+        {% if blok.second_nav_links != blank %}
+          <ul class="navbar-nav justify-content-end col-sm-5 order-lg-12 d-none d-md-flex">
+            {% for item in blok.second_nav_links %}
+              {% include item.component with blok: item %}
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+      {% else %}
+
+        <div class="col-3 text-left">
+          {% if blok.logo != blank %}
+            <a href="{{ blok.logo_link | url }}">
+              <img src="{{ blok.logo }}" height="{{ blok.logo_height }}" alt="Logo">
+            </a>
+          {% endif %}
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-{{ blok._uid }}" aria-controls="navbar-{{ blok._uid }}" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-center col-md-6 navbar-{{ blok._uid }}">
+          {% if blok.nav_links != blank %}
+            <ul class="navbar-nav {{ blok.main_nav_style | join:' ' }}">
+              {% for item in blok.nav_links %}
+                {% include item.component with blok: item %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+
+        {% if blok.button_text != blank %}
+
+          <div class="collapse navbar-collapse navbar-{{ blok._uid }}">
+            {% if blok.second_nav_links != blank %}
+              <ul class="navbar-nav ml-auto justify-content-end">
+                {% for item in blok.second_nav_links %}
+                  {% include item.component with blok: item %}
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            <a class="btn ml-md-3" href="{{ blok.button_link | url }}">
+              {{ blok.button_text }}
+            </a>
+          </div>
+
+        {% else %}
+
+          {% if blok.second_nav_links != blank %}
+            <ul class="navbar-nav col-3 justify-content-end d-none d-md-flex">
+              {% for item in blok.second_nav_links %}
+                {% include item.component with blok: item %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+
+        {% endif %}
+
+
+      {% endif %}
+    </nav>
+  </div>
+</header>

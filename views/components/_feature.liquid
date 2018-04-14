@@ -1,0 +1,10 @@
+{{ blok._editable }}
+<div class="col-12 col-sm-6 col-lg-3 pt-4 pt-lg-0">
+  {% if blok.icon != blank %}
+    <img alt="image" class="fdb-icon" src="{{ blok.icon }}">
+  {% endif %}
+
+  <h3><strong>{{ blok.headline }}</strong></h3>
+
+  <p>{{ blok.text }}</p>
+</div>

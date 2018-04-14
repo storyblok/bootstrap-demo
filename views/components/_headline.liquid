@@ -1,0 +1,6 @@
+{{ blok._editable }}
+<{{ blok.type | default:'h2' }}>
+  {% if blok.strong == true %}<strong>{% endif %}
+    {{ blok.text }}
+  {% if blok.strong == true %}</strong>{% endif %}
+</{{ blok.type | default:'h2' }}>

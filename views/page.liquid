@@ -5,38 +5,63 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Site - {{ story.name }}</title>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css">
+
   {% if proxy_mode %}
     <link href="{{ 'assets/css/above.css' | asset_url }}" rel="stylesheet">
   {% else %}
     <style>{%- include 'above_fold_css' -%}</style>
   {% endif %}
 
+  <!--
+  The HTML and CSS of the components are a modified version of the Froala Design Blocks.
+  Copyright (c) 2017, Froala (https://www.froala.com/), FROALA OPEN WEB DESIGN LICENSE Version 1.0 - 16 October 2017
+  https://github.com/froala/design-blocks/blob/master/LICENSE
+  -->
+
   <link rel="preload" id="stylesheet" href="{{ 'assets/css/below.css' | asset_url }}" as="style" onload="this.rel='stylesheet'">
 </head>
 <body>
 
-  <main id="main" class="main" role="main">
-    <h1>Storyblok</h1>
+  <div class="body__wrap">
 
-    <div>
-      You have successfully started the Storyblok rendering service.
-    </div>
+  <div class="body__other">
+  {% if story.content.component != 'blank' %}
+    {%- set global from story id:'global' -%}
+    {% for blok in global.content.header %}
+      {%- include blok.component with blok: blok -%}
+    {% endfor %}
+    {% if global.content.header == blank %}
+      {{ global.content._editable }}
+      <div>
+        Define header blocks here
+      </div>
+    {% endif %}
+  {% endif %}
+  </div>
 
-    <h2>How to start developing?</h2>
-
-    <ol class="main__quickstart">
-      <li>Clone the quickstart repo <strong>git clone https://github.com/storyblok/quickstart.git</strong></li>
-      <li>Create a space in Storyblok and choose advanced settings to choose the option "Hosted/Rendering service" and then "Quickstart"</li>
-      <li>Fill in the parameters INSERT_SPACE_ID and INSERT_YOUR_DOMAIN config.js which you can find in the Storyblok dashboard</li>
-      <li>Rename _token.js to token.js and insert your "theme" token (which you can find in the Storyblok dashboard).</li>
-      <li>Restart your server with npm run dev</li>
-      <li>Add your dev environment 'http://localhost:4440/' to the environment settings</li>
-    </ol>
-
-    <img class="main__quickstartimg" src="https://a.storyblok.com/f/42225/2292x1278/a193038be7/quickstart.jpg" />
-
+  <main id="main" class="main body__content" role="main">
     {% include story.content.component with blok: story.content, title: story.name, date: story.created_at %}
   </main>
+
+
+  <div class="body__other">
+  {% if story.content.component != 'blank' %}
+    {% for blok in global.content.footer %}
+      {%- include blok.component with blok: blok -%}
+    {% endfor %}
+    {% if global.content.footer == blank %}
+      {{ global.content._editable }}
+      <div>
+        Define footer blocks here
+      </div>
+    {% endif %}
+  {% endif %}
+  </div>
+
+  </div>
 
   <script type="text/javascript" src="{{ 'assets/js/scripts.js' | asset_url }}"></script>
 
@@ -44,12 +69,22 @@
     <script type="text/javascript" src="//app.storyblok.com/f/storyblok-latest.js?t={{ public_token }}"></script>
     <script type="text/javascript">
 
-      storyblok.on('change', function() {
-        location.reload(true)
+      storyblok.on('change', function(event) {
+        if (!event.slugChanged) {
+          location.reload(true)
+        }
       })
 
-      storyblok.on('published', function() {
-        location.reload(true)
+      storyblok.on('published', function(event) {
+        if (!event.slugChanged) {
+          location.reload(true)
+        }
+      })
+
+      storyblok.pingEditor(function() {
+        if (storyblok.inEditor) {
+          storyblok.enterEditmode()
+        }
       })
 
     </script>
