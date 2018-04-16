@@ -17,8 +17,8 @@
 
         {% for article in articles.data, per_page:10 %}
           <div class="card mb-4">
-            {% if article.content.image != blank %}
-              <img class="card-img-top" src="{{ article.content.image }}" alt="{{ article.name | escape }}">
+            {% if article.content.teaser_image != blank %}
+              <img class="card-img-top" src="{{ article.content.teaser_image | resize:'500x200' }}" alt="{{ article.name | escape }}">
             {% endif %}
             <div class="card-body">
               <h2 class="card-title">{{ article.name }}</h2>
