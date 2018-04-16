@@ -27,6 +27,16 @@
             {{ author.content.name }}
           </p>
         </div>
+
+        <h3 class="mt-5">Categories</h3>
+        <ul class="list-unstyled mb-0">
+          {% set categories from stories starts_with:'categories/' %}
+          {% for category in categories.data %}
+            <li>
+              <a href="?filter={{ category.uuid }}">{{ category.name }}</a>
+            </li>
+          {% endfor %}
+        </ul>
       </div>
     </div>
   </div>
